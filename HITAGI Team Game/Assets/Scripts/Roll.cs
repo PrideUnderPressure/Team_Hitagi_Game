@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Roll : MonoBehaviour
 {
-    public Player_Controller playerControllerScript;
+    public PlayerController playerControllerScript;
     public int rollSpeed = 15;
     public float rollDistance;
     public float cooldown = 2f;
@@ -12,7 +12,7 @@ public class Roll : MonoBehaviour
 
     void Start()
     {
-        playerControllerScript = gameObject.GetComponent<Player_Controller>();
+        playerControllerScript = gameObject.GetComponent<PlayerController>();
     }
 
     public void DoRoll()
