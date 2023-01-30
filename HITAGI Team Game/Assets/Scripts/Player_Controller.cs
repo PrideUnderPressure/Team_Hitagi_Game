@@ -7,17 +7,18 @@ public class Player_Controller : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     public bool disableInputs = false;
-
-    private Vector2 moveDirection;
-    public float walkSpeed;
     public float moveX;
     public float moveY;
 
+    private Vector2 moveDirection;
+    public float walkSpeed;
 
+    public Roll scriptRoll;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        scriptRoll = gameObject.GetComponent<Roll>();
     }
 
     void Update()
@@ -39,12 +40,18 @@ public class Player_Controller : MonoBehaviour
         moveX = Input.GetAxisRaw("Horizontal");
         //Same but with W and S for vertical movement
         moveY = Input.GetAxisRaw("Vertical");
-        //Makes a new Vector2 to be used in Movement
-        moveDirection = new Vector2(moveX, moveY);
+        //Input for ROLL
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            scriptRoll.DoRoll();
+        }
     }
 
     public void Movement()
     {
+        //Makes a new Vector2 to be used in Movement
+        moveDirection = new Vector2(moveX, moveY);
+        //Adds velocity to the rigidbody
         rigidBody.velocity = new Vector2(moveDirection.x * walkSpeed, moveDirection.y * walkSpeed);
     }
 }
