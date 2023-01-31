@@ -9,15 +9,17 @@ public class Roll : MonoBehaviour
     public float rollDistance;
     public float cooldown = 2f;
     public bool cooldownOn = false;
+    private float defaultSpeed;
 
     void Start()
     {
         playerControllerScript = gameObject.GetComponent<Player_Controller>();
+        defaultSpeed = playerControllerScript.walkSpeed;
     }
 
     public void DoRoll()
     {
-        if (cooldownOn != true)
+        if (cooldownOn != true && playerControllerScript.moveX != 0 || playerControllerScript.moveY != 0)
         StartCoroutine(RollRoutine());
     }
 
@@ -29,7 +31,7 @@ public class Roll : MonoBehaviour
         //How much will it roll
         yield return new WaitForSeconds(rollDistance);
         //resets back to normal movement speed
-        playerControllerScript.walkSpeed = 6;
+        playerControllerScript.walkSpeed = defaultSpeed;
         //Sets the cooldown
         yield return new WaitForSeconds(cooldown);
         cooldownOn = false;
