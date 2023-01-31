@@ -11,6 +11,9 @@ public class Shooting : MonoBehaviour
     public bool canFire;
     private float timer;
     public float timeBetweenFiring;
+    public float mousePosX;
+    
+
 
     void Start()
     {
@@ -21,6 +24,8 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+
+        mousePosX = mousePos.x;
 
         Vector3 rotation = mousePos - transform.position;
 
