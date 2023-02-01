@@ -18,6 +18,8 @@ public class MC_Sounds_Script : MonoBehaviour
     
     public GameObject objectShooting;
     public Shooting scriptShooting;
+
+    public bool canPlayFootstep;
     
 
     void Start()
@@ -31,33 +33,55 @@ public class MC_Sounds_Script : MonoBehaviour
         
     }
 
-    /*private void Update()
+    void Update()
     {
-        if (feetRb.velocity.x > 0 || feetRb.velocity.y > 0)
+        if (pcScript.moveX != 0 || pcScript.moveY != 0)
         {
-            StartCoroutine(PlayFootstep());
+            _audioSource.clip = footstepSounds[listIndex];
+            if (canPlayFootstep)
+            {
+                canPlayFootstep = false;
+                StartCoroutine(PlayFootstep());
+            }
+        }
+        if (pcScript.moveX == 0 && pcScript.moveY == 0)
+        {
+            StopFootstep();
+            canPlayFootstep = true;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        switch (other.gameObject.name)
+        switch (other.gameObject.tag)
         {
-            case "Tilemap_StoneTiles":
+            case "Stone_Tiles":
                 if(listIndex != 0)
                     listIndex = 0;
+                    break; 
+            
+            case "Dirt": 
+                if(listIndex != 1)
+                    listIndex = 1;
+                    break; 
+            case "Grass": 
+                if(listIndex != 2) 
+                    listIndex = 2;
                     break;
-                case "Tilemap_Dirt":
-                listIndex = 1;
-                break;
         }
-    }*/
+        _audioSource.clip = footstepSounds[listIndex];
+        _audioSource.Play();
+    }
 
     private IEnumerator PlayFootstep()
     {
-        _audioSource.clip = footstepSounds[listIndex];
         _audioSource.Play();
         yield return new WaitForSeconds(soundDelay);
+    }
+
+    private void StopFootstep()
+    {
+        _audioSource.Stop();
     }
 
     public void PlayShot()

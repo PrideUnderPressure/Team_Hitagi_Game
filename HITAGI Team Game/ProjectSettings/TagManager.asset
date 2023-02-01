@@ -8,6 +8,8 @@ TagManager:
   - Dirt
   - Selected_Gun
   - Muzzle_Flash
+  - Player_Feet
+  - Grass
   layers:
   - Default
   - TransparentFX
