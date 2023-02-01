@@ -1,45 +1,67 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(AudioSource))]
 public class MC_Sounds_Script : MonoBehaviour
 {
-    public AudioSource runDirt;
-    public AudioSource runStoneTiles;
+    public List<AudioClip> footstepSounds;
+    public List<Tile> floorTile;
 
-    public Player_Controller pcScript;
-    public bool playingSound = false;
+    private Player_Controller pcScript;
+    private AudioSource _audioSource;
+    private int listIndex;
+    private Rigidbody2D feetRb;
+    public float soundDelay;
+    
+    public GameObject objectShooting;
+    public Shooting scriptShooting;
+    
 
     void Start()
     {
+        scriptShooting = objectShooting.GetComponent<Shooting>();
+
         pcScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
+        feetRb = gameObject.GetComponent<Rigidbody2D>();
+        listIndex = 0;
+        
     }
 
-    void Update()
+    /*private void Update()
     {
-
-        if (pcScript.moveX != 0 || pcScript.moveY != 0)
+        if (feetRb.velocity.x > 0 || feetRb.velocity.y > 0)
         {
-            playingSound = true;
-        }
-
-        if (pcScript.moveX == 0 && pcScript.moveY == 0)
-        {
-            playingSound = false;
-            runDirt.Pause();
+            StartCoroutine(PlayFootstep());
         }
     }
 
-    void FixedUpdate()
+    private void OnTriggerEnter(Collider other)
     {
+        switch (other.gameObject.name)
+        {
+            case "Tilemap_StoneTiles":
+                if(listIndex != 0)
+                    listIndex = 0;
+                    break;
+                case "Tilemap_Dirt":
+                listIndex = 1;
+                break;
+        }
+    }*/
 
+    private IEnumerator PlayFootstep()
+    {
+        _audioSource.clip = footstepSounds[listIndex];
+        _audioSource.Play();
+        yield return new WaitForSeconds(soundDelay);
     }
 
-
-    public void RunSfxReset()
+    public void PlayShot()
     {
-        runDirt.Pause();
-        runStoneTiles.Stop();
+        
     }
-
 }

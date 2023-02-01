@@ -14,6 +14,8 @@ public class MC_Animation_Script : MonoBehaviour
 
     void Start()
     {
+        //This sets the Selected_Gun's Animator to "animeGun". Meaning that switching the animator will switch the weapon sprite.
+        //SO the script that sets the animator should be activated on Select Weapon script, that will swap it to the corret sprite;
         animeGun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Animator>();
         shootingScript = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Shooting>();
     }

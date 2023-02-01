@@ -52,7 +52,7 @@ public class Player_Controller : MonoBehaviour
         sRGun = gunObject.GetComponent<SpriteRenderer>();
         
         scriptShooting.onShoot.AddListener(()=>
-        {
+        { 
             aniScript.Shot(shotAngle);
         });
     }

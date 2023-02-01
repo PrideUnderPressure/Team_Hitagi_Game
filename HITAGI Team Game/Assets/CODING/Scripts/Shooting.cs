@@ -16,6 +16,8 @@ public class Shooting : MonoBehaviour
     public float mousePosX;
     public float mousePosY;
     public UnityEvent onShoot;
+
+    public AudioSource _audioSource;
     
 
 
@@ -24,6 +26,8 @@ public class Shooting : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         muzzleFlash = GameObject.FindGameObjectWithTag("Muzzle_Flash").GetComponent<SpriteRenderer>();
         muzzleFlash.enabled = false;
+
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,6 +56,7 @@ public class Shooting : MonoBehaviour
         {
             onShoot.Invoke();
             StartCoroutine(MuzzleFlash());
+            _audioSource.PlayOneShot(_audioSource.clip, 1f);
             canFire = false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
@@ -64,6 +69,7 @@ public class Shooting : MonoBehaviour
         muzzleFlash.enabled = true;
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.enabled = false;
+        
     }
 
 }
