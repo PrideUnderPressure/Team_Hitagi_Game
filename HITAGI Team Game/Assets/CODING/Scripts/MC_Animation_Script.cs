@@ -39,13 +39,14 @@ public class MC_Animation_Script : MonoBehaviour
         if (x == 1)
         {
             //STRAIGHT (1)
-            animeGun.Play("MC_Shot_Gun1_Straight", -1, 0f);
+            animeGun.ResetTrigger("ShotStraightT");
+            animeGun.SetTrigger("ShotStraightT");
         }
 
         if (x == 2)
         {
             //DOWN (2)
-            animeGun.Play("MC_Shot_Gun1_Down", -1, 0f);
+            //animeGun.Play("MC_Shot_Gun1_Down", -1, 0f);
         }
     }
 
