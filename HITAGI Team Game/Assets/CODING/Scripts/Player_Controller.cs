@@ -22,11 +22,22 @@ public class Player_Controller : MonoBehaviour
     //Animations
     public MC_Animation_Script aniScript;
     public bool disableAnimations = false;
-    public SpriteRenderer spriteRenderer;
 
-    private float mousePosFloat;
+    //SPRITE RENDERERS
+    public SpriteRenderer sRBody;
+    public SpriteRenderer sRGun;
+    public GameObject gunObject;
+
+    public float mousePosFloatX;
+    public float mousePosFloatY;
     public float playerPosX;
-    public float mousePosInRelation;
+    public float playerPosY;
+    public float mousePosInRelationX;
+    public float mousePosInRelationY;
+
+
+    public bool check = false;
+    
 
     void Start()
     {
@@ -35,14 +46,20 @@ public class Player_Controller : MonoBehaviour
         scriptShooting = objectShooting.GetComponent<Shooting>();
         aniScript = gameObject.GetComponent<MC_Animation_Script>();
         defaultSpeed = walkSpeed;
+        sRBody = gameObject.GetComponent<SpriteRenderer>();
+        sRGun = gunObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        MousePositions();
+
         if (disableInputs != true)
         {
             Inputs();
+            Flips();
         }
+
     }
 
     void FixedUpdate()
@@ -54,7 +71,6 @@ public class Player_Controller : MonoBehaviour
             Animations();
         }
 
-        Flips();
     }
 
     public void Inputs()
@@ -69,8 +85,16 @@ public class Player_Controller : MonoBehaviour
             scriptRoll.DoRoll();
         }
 
-        playerPosX = transform.position.x;
-        mousePosInRelation = mousePosFloat - playerPosX;
+        if (Input.GetMouseButtonDown(0) && scriptShooting.canFire && mousePosInRelationY > -0.22)
+        {
+            aniScript.Shot(1);
+        }
+
+        if (Input.GetMouseButtonDown(0) && scriptShooting.canFire && mousePosInRelationY < -0.22)
+        {
+            aniScript.Shot(2);
+        }
+
 
     }
 
@@ -96,16 +120,29 @@ public class Player_Controller : MonoBehaviour
 
     public void Flips()
     {
-        mousePosFloat = scriptShooting.mousePosX;
 
-        if (mousePosInRelation < 0)
+        if (mousePosInRelationX < 0)
         {
-            spriteRenderer.flipX = false;
+            sRBody.flipX = false;
+            sRGun.flipX = false;
         }
 
-        if (mousePosInRelation > 0)
+        if (mousePosInRelationX > 0)
         {
-            spriteRenderer.flipX = true;
+            sRBody.flipX = true;
+            sRGun.flipX = true;
         }
+
     }
+
+    public void MousePositions()
+    {
+        mousePosFloatX = scriptShooting.mousePosX;
+        mousePosFloatY = scriptShooting.mousePosY;
+        playerPosX = transform.position.x;
+        playerPosY = transform.position.y;
+        mousePosInRelationX = mousePosFloatX - playerPosX;
+        mousePosInRelationY = mousePosFloatY - playerPosY;
+    }
+
 }

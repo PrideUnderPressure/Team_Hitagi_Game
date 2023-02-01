@@ -8,16 +8,20 @@ public class Shooting : MonoBehaviour
     private Vector3 mousePos;
     public GameObject bullet;
     public Transform bulletTransform;
+    public SpriteRenderer muzzleFlash;
     public bool canFire;
     private float timer;
     public float timeBetweenFiring;
     public float mousePosX;
+    public float mousePosY;
     
 
 
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        muzzleFlash = GameObject.FindGameObjectWithTag("Muzzle_Flash").GetComponent<SpriteRenderer>();
+        muzzleFlash.enabled = false;
     }
 
     // Update is called once per frame
@@ -26,6 +30,7 @@ public class Shooting : MonoBehaviour
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
         mousePosX = mousePos.x;
+        mousePosY = mousePos.y;
 
         Vector3 rotation = mousePos - transform.position;
 
@@ -43,8 +48,19 @@ public class Shooting : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && canFire)
         {
+            StartCoroutine(MuzzleFlash());
             canFire = false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
+
+
     }
+
+    public IEnumerator MuzzleFlash()
+    {
+        muzzleFlash.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        muzzleFlash.enabled = false;
+    }
+
 }
