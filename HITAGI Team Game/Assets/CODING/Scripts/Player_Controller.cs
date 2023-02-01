@@ -37,6 +37,8 @@ public class Player_Controller : MonoBehaviour
 
 
     public bool check = false;
+
+    private int shotAngle = 0;
     
 
     void Start()
@@ -48,6 +50,11 @@ public class Player_Controller : MonoBehaviour
         defaultSpeed = walkSpeed;
         sRBody = gameObject.GetComponent<SpriteRenderer>();
         sRGun = gunObject.GetComponent<SpriteRenderer>();
+        
+        scriptShooting.onShoot.AddListener(()=>
+        {
+            aniScript.Shot(shotAngle);
+        });
     }
 
     void Update()
@@ -85,14 +92,14 @@ public class Player_Controller : MonoBehaviour
             scriptRoll.DoRoll();
         }
 
-        if (Input.GetMouseButtonDown(0) && scriptShooting.canFire && mousePosInRelationY > -0.22)
+        if (mousePosInRelationY > -0.22)
         {
-            aniScript.Shot(1);
+            shotAngle = 1;
         }
 
-        if (Input.GetMouseButtonDown(0) && scriptShooting.canFire && mousePosInRelationY < -0.22)
+        if (mousePosInRelationY < -0.22)
         {
-            aniScript.Shot(2);
+            shotAngle = 2;
         }
 
 

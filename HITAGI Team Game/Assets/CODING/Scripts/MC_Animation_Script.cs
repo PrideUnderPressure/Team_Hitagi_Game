@@ -16,8 +16,8 @@ public class MC_Animation_Script : MonoBehaviour
     {
         animeGun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Animator>();
         shootingScript = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Shooting>();
-
     }
+
 
     public void RunAnimation(bool x)
     {
@@ -41,12 +41,15 @@ public class MC_Animation_Script : MonoBehaviour
             //STRAIGHT (1)
             animeGun.ResetTrigger("ShotStraightT");
             animeGun.SetTrigger("ShotStraightT");
+            Debug.Log("shot STRAIGHT");
         }
 
         if (x == 2)
         {
             //DOWN (2)
-            //animeGun.Play("MC_Shot_Gun1_Down", -1, 0f);
+            animeGun.ResetTrigger("ShotDownT");
+            animeGun.SetTrigger("ShotDownT");
+            Debug.Log("shot DOWN");
         }
     }
 
