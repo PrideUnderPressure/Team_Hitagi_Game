@@ -19,8 +19,11 @@ public class Roll : MonoBehaviour
 
     public void DoRoll()
     {
-        if (cooldownOn != true && playerControllerScript.moveX != 0 || playerControllerScript.moveY != 0)
-        StartCoroutine(RollRoutine());
+        if (playerControllerScript.moveX != 0 || playerControllerScript.moveY != 0)
+        {
+            if (cooldownOn != true)
+                StartCoroutine(RollRoutine());
+        }
     }
 
     IEnumerator RollRoutine()
