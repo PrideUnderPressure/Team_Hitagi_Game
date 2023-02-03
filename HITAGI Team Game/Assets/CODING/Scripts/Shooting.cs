@@ -12,12 +12,16 @@ public class Shooting : MonoBehaviour
     public SpriteRenderer muzzleFlash;
     public bool canFire;
     private float timer;
+
     public float timeBetweenFiring;
+
     public float mousePosX;
     public float mousePosY;
+
     public UnityEvent onShoot;
 
     public AudioSource _audioSource;
+    public bool notRolling;
     
 
 
@@ -26,6 +30,7 @@ public class Shooting : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         muzzleFlash = GameObject.FindGameObjectWithTag("Muzzle_Flash").GetComponent<SpriteRenderer>();
         muzzleFlash.enabled = false;
+        notRolling = true;
 
         _audioSource = gameObject.GetComponent<AudioSource>();
     }
@@ -42,23 +47,26 @@ public class Shooting : MonoBehaviour
 
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0, 0, rotZ);
-        if (!canFire)
+        if (notRolling)
         {
-            timer += Time.deltaTime;
-            if (timer > timeBetweenFiring)
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+            if (!canFire)
             {
-                canFire = true;
-                timer = 0;
+                timer += Time.deltaTime;
+                if (timer > timeBetweenFiring)
+                {
+                    canFire = true;
+                    timer = 0;
+                }
             }
-        }
-        if (Input.GetMouseButton(0) && canFire)
-        {
-            onShoot.Invoke();
-            StartCoroutine(MuzzleFlash());
-            _audioSource.PlayOneShot(_audioSource.clip, 1f);
-            canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            if (Input.GetMouseButton(0) && canFire)
+            {
+                onShoot.Invoke();
+                StartCoroutine(MuzzleFlash());
+                _audioSource.PlayOneShot(_audioSource.clip, 1f);
+                canFire = false;
+                Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            }
         }
 
 

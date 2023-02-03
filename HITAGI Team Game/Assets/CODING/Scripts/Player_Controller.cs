@@ -87,12 +87,14 @@ public class Player_Controller : MonoBehaviour
         //Same but with W and S for vertical movement
         moveY = Input.GetAxisRaw("Vertical");
         //Input for ROLL
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             scriptRoll.DoRoll();
         }
 
-        if (mousePosInRelationY > -0.22)
+        if (mousePosInRelationY > -0.22 && mousePosInRelationY < 0.22)
         {
             shotAngle = 1;
         }
@@ -100,6 +102,11 @@ public class Player_Controller : MonoBehaviour
         if (mousePosInRelationY < -0.22)
         {
             shotAngle = 2;
+        }
+
+        if (mousePosInRelationY > 0.22)
+        {
+            shotAngle = 3;
         }
 
 

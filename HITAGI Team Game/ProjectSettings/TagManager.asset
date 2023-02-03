@@ -10,6 +10,7 @@ TagManager:
   - Muzzle_Flash
   - Player_Feet
   - Grass
+  - Shooting_Object
   layers:
   - Default
   - TransparentFX

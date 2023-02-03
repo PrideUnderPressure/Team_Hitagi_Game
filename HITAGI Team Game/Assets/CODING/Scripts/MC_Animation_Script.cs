@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MC_Animation_Script : MonoBehaviour
 {
@@ -53,6 +54,22 @@ public class MC_Animation_Script : MonoBehaviour
             animeGun.SetTrigger("ShotDownT");
             Debug.Log("shot DOWN");
         }
+
+        if (x == 3)
+        {
+            //UP (3)
+            animeGun.ResetTrigger("ShotUpT");
+            animeGun.SetTrigger("ShotUpT");
+            Debug.Log("shot UP");
+        }
+    }
+
+    public void Roll()
+    {
+        animeBody.ResetTrigger("RollT");
+        animeBody.SetTrigger("RollT");
+        animeGun.ResetTrigger("RollT");
+        animeGun.SetTrigger("RollT");
     }
 
 }
