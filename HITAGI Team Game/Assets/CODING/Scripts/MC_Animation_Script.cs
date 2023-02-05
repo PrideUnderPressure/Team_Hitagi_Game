@@ -71,5 +71,6 @@ public class MC_Animation_Script : MonoBehaviour
         animeGun.ResetTrigger("RollT");
         animeGun.SetTrigger("RollT");
     }
-
+    
+    
 }

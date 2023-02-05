@@ -27,6 +27,8 @@ public class Player_Controller : MonoBehaviour
     public SpriteRenderer sRBody;
     public SpriteRenderer sRGun;
     public GameObject gunObject;
+    public Animator animeBody;
+    public Animator animeGun;
 
     public float mousePosFloatX;
     public float mousePosFloatY;
@@ -39,10 +41,21 @@ public class Player_Controller : MonoBehaviour
     public bool check = false;
 
     private int shotAngle = 0;
-    
+    public bool disableWarp;
+    public bool warping;
 
+    public GameObject world1;
+    public GameObject world2;
+
+    public bool inNormalWorld;
     void Start()
     {
+        inNormalWorld = true;
+        world1 = GameObject.FindGameObjectWithTag("Normal_World");
+        world2 = GameObject.FindGameObjectWithTag("Zombie_World");
+        world2.SetActive(false);
+        
+        animeGun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         scriptRoll = gameObject.GetComponent<Roll>();
         scriptShooting = objectShooting.GetComponent<Shooting>();
@@ -67,10 +80,57 @@ public class Player_Controller : MonoBehaviour
             Flips();
         }
 
+        if (disableWarp != true)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                InitiateWarp();
+            }
+        }
+
+        if (warping)
+        {
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                animeBody.SetBool("IsWarping", false);
+                animeGun.SetBool("IsWarping", false);
+                disableInputs = false;
+            }
+        }
+            
     }
 
+    public void InitiateWarp()
+    {
+        disableInputs = true;
+        warping = true;
+        moveX = 0;
+        moveY = 0;
+        animeBody.SetBool("IsWarping", true);
+        animeGun.SetBool("IsWarping", true);
+
+    }
+
+    public void Warp()
+    {
+        if (inNormalWorld);
+        {
+            world1.SetActive(!inNormalWorld);
+            world2.SetActive(inNormalWorld);
+            Debug.Log("Warped");
+        }
+        /*if (inNormalWorld == false);
+        {
+            world2.SetActive(false);
+            world1.SetActive(true);
+            Debug.Log("Warped Back wow");
+        }*/
+        inNormalWorld = !inNormalWorld;
+        disableInputs = false;
+    }
     void FixedUpdate()
     {
+        
         Movement();
 
         if (disableAnimations != true)
@@ -89,7 +149,7 @@ public class Player_Controller : MonoBehaviour
         //Input for ROLL
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             scriptRoll.DoRoll();
         }
@@ -158,5 +218,8 @@ public class Player_Controller : MonoBehaviour
         mousePosInRelationX = mousePosFloatX - playerPosX;
         mousePosInRelationY = mousePosFloatY - playerPosY;
     }
+
+
+
 
 }

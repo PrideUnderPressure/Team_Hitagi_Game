@@ -90,47 +90,29 @@
       <updated>1675256869506</updated>
       <workItem from="1675256873677" duration="15417000" />
       <workItem from="1675433674542" duration="4874000" />
+      <workItem from="1675554110277" duration="573000" />
+      <workItem from="1675554712350" duration="13254000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/CODING/Scripts/MC_Animation_Script.cs</url>
-          <line>45</line>
-          <properties documentPath="C:\Users\usr\Desktop\Github_Folder\Team_Hitagi_Game\HITAGI Team Game\Assets\CODING\Scripts\MC_Animation_Script.cs" initialLine="42" containingFunctionPresentation="method 'Shot'">
-            <startOffsets>
-              <option value="1480" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1483" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/CODING/Scripts/Player_Controller.cs</url>
-          <line>97</line>
-          <properties documentPath="C:\Users\usr\Desktop\Github_Folder\Team_Hitagi_Game\HITAGI Team Game\Assets\CODING\Scripts\Player_Controller.cs" initialLine="97" containingFunctionPresentation="method 'Inputs'">
-            <startOffsets>
-              <option value="2266" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2267" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

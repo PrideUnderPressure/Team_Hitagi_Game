@@ -22,7 +22,11 @@ public class Shooting : MonoBehaviour
 
     public AudioSource _audioSource;
     public bool notRolling;
-    
+
+    public float maxDmg;
+    public float maxDmg2;
+    public int maxAmmo;
+    public float ammo;
 
 
     void Start()
@@ -69,7 +73,7 @@ public class Shooting : MonoBehaviour
             }
         }
 
-
+        maxDmg2 = maxDmg;
     }
 
     public IEnumerator MuzzleFlash()
@@ -80,4 +84,8 @@ public class Shooting : MonoBehaviour
         
     }
 
+    public void DamageSwitch(float x)
+    {
+        maxDmg = x;
+    }
 }
