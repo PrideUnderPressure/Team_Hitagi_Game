@@ -202,7 +202,7 @@ MonoBehaviour:
   shootScript: {fileID: 0}
   whichToSwitch: 1
   firerate: 0.5
-  maxDamage: 40
+  maxDamage: 100
   maxAmmo: 0
 --- !u!70 &7019343341850891397
 CapsuleCollider2D:

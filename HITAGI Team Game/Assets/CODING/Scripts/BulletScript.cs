@@ -49,8 +49,10 @@ public class BulletScript : MonoBehaviour
                 animator.SetTrigger("IsHit");
                 GameObject zombie = other.gameObject;
                 zombie.GetComponent<Agent>().Hit();
+                zombie.GetComponent<Agent>().Chase();
                 zombie.GetComponent<Stats>().Damage(damage);
                 alreadyHit = true;
+                
             }
             else if (other.gameObject.tag == "Walls")
             {

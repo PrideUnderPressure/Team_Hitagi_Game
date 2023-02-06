@@ -36,7 +36,7 @@ public class Stats : MonoBehaviour
                 animator.SetBool("IsRunning", true);
             }
         }
-        else if (health - x < 0)
+        else if (health - x <= 0)
         {
             
             animator.SetTrigger("IsDead");

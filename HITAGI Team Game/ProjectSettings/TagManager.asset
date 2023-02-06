@@ -15,6 +15,8 @@ TagManager:
   - Zombie
   - Normal_World
   - Zombie_World
+  - Z_Melee_Attack
+  - Spawner
   layers:
   - Default
   - TransparentFX

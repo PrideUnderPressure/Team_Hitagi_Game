@@ -25,8 +25,16 @@ public class Agent : MonoBehaviour
     
     public float timer;
     public float staggerTime;
+
+    public GameObject attackVfx;
+    public Player_Stats playerStatsScript;
+    public bool alarm = false;
+    public GameObject detector;
+    public bool needsDetector;
+    public bool isChaser;
     void Start()
     {
+        playerStatsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Stats>();
         target = this.gameObject.transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -35,6 +43,7 @@ public class Agent : MonoBehaviour
         agents = gameObject.GetComponent<NavMeshAgent>();
         sR = gameObject.GetComponent<SpriteRenderer>();
         alreadyHit = false;
+
     }
 
     // Update is called once per frame
@@ -68,6 +77,11 @@ public class Agent : MonoBehaviour
                 timer = 0;
             }
         }
+
+        if (isChaser)
+        {
+            Chase();
+        }
     }
      public void Flips()
     {
@@ -89,7 +103,6 @@ public class Agent : MonoBehaviour
         agents.velocity = Vector3.zero;
         alreadyHit = true;
     }
-
     public void NotHit()
     {
         alreadyHit = false;
@@ -98,5 +111,24 @@ public class Agent : MonoBehaviour
     public void Chase()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        detector = gameObject.transform.GetChild(0).gameObject;
+        if (needsDetector)
+        detector.GetComponent<PlayerDetector>().alarm = true;
+    }
+
+    public void Attacked()
+    {
+        Debug.Log("CHUUUUUUUUUUJ");
+        playerStatsScript.IsHit(gameObject.GetComponent<Stats>().damage);
+        target = this.gameObject.transform;
+        StartCoroutine(Attacked2());
+    }
+
+    public IEnumerator Attacked2()
+    {
+        yield return new WaitForSeconds(0.2f);
+        attackVfx.GetComponent<Attack_Vfx_Script>().attacked = false;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -48,13 +50,14 @@ public class Player_Controller : MonoBehaviour
     public GameObject world2;
 
     public bool inNormalWorld;
+
     void Start()
     {
         inNormalWorld = true;
         world1 = GameObject.FindGameObjectWithTag("Normal_World");
         world2 = GameObject.FindGameObjectWithTag("Zombie_World");
         world2.SetActive(false);
-        
+
         animeGun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         scriptRoll = gameObject.GetComponent<Roll>();
@@ -63,11 +66,8 @@ public class Player_Controller : MonoBehaviour
         defaultSpeed = walkSpeed;
         sRBody = gameObject.GetComponent<SpriteRenderer>();
         sRGun = gunObject.GetComponent<SpriteRenderer>();
-        
-        scriptShooting.onShoot.AddListener(()=>
-        { 
-            aniScript.Shot(shotAngle);
-        });
+
+        scriptShooting.onShoot.AddListener(() => { aniScript.Shot(shotAngle); });
     }
 
     void Update()
@@ -97,7 +97,7 @@ public class Player_Controller : MonoBehaviour
                 disableInputs = false;
             }
         }
-            
+
     }
 
     public void InitiateWarp()
@@ -113,7 +113,7 @@ public class Player_Controller : MonoBehaviour
 
     public void Warp()
     {
-        if (inNormalWorld);
+        if (inNormalWorld) ;
         {
             world1.SetActive(!inNormalWorld);
             world2.SetActive(inNormalWorld);
@@ -128,9 +128,10 @@ public class Player_Controller : MonoBehaviour
         inNormalWorld = !inNormalWorld;
         disableInputs = false;
     }
+
     void FixedUpdate()
     {
-        
+
         Movement();
 
         if (disableAnimations != true)
@@ -219,7 +220,21 @@ public class Player_Controller : MonoBehaviour
         mousePosInRelationY = mousePosFloatY - playerPosY;
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Z_Melee_Attack")
+        {
+            gameObject.GetComponent<Player_Stats>().canDamage = true;
+            other.GetComponent<Attack_Vfx_Script>().Attacking();
+        }
+    }
 
-
-
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Z_Melee_Attack")
+        {
+            gameObject.GetComponent<Player_Stats>().canDamage = false;
+        }
+    }
 }
+
