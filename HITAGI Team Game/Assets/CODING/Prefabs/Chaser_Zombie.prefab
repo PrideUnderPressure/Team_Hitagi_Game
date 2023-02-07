@@ -497,6 +497,17 @@ MonoBehaviour:
   alreadyHit: 0
   damage: 25
   navMesh: {fileID: 0}
+  bloodTypes:
+  - {fileID: 6686866088101141443, guid: 135b599a7833ef94894f0f04f7673274, type: 3}
+  - {fileID: 8067656813663960581, guid: 835b871e336114e449c5bb7bf053fe2b, type: 3}
+  - {fileID: 2456424314475085313, guid: 4b5f1966d439a2d4ba8b524f1f4ea3db, type: 3}
+  - {fileID: 8963350753628773805, guid: 757c46dd7ed033b4b84730f72dcd2e4e, type: 3}
+  - {fileID: 7010792664617963412, guid: 569f7d4cb940f374e8bb213ed06e1fd0, type: 3}
+  - {fileID: 5139395114932781969, guid: 0ef5d79b1fb2b24428b43f1072899124, type: 3}
+  - {fileID: 4236507259599751689, guid: ee2f0f7bf79eeb9418495dfffdf46ccb, type: 3}
+  - {fileID: 3296159048703870118, guid: f625729f98a69a747bd24be05cb40f1b, type: 3}
+  - {fileID: 4708433774018940122, guid: 66c3e1d7c0e06784aac569e24ae9d182, type: 3}
+  bloodIndex: 0
 --- !u!114 &4646944698194549772
 MonoBehaviour:
   m_ObjectHideFlags: 0

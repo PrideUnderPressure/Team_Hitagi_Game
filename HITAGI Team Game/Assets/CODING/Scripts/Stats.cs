@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Stats : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class Stats : MonoBehaviour
 
     public float damage;
     public NavMeshAgent navMesh;
+
+    
+    //FOR BLOOD
+    public List<GameObject> bloodTypes;
+    public int bloodIndex;
+    
+
+
+
 
     private void Start()
     {
@@ -38,7 +48,7 @@ public class Stats : MonoBehaviour
         }
         else if (health - x <= 0)
         {
-            
+            Destroy(gameObject.GetComponent<CapsuleCollider2D>());
             animator.SetTrigger("IsDead");
         }
     }
@@ -47,11 +57,41 @@ public class Stats : MonoBehaviour
     {
         navMesh.speed = 0;
         navMesh.velocity = Vector3.zero;
-        Destroy(this.gameObject);
+        ShedBlood();
+
+        
     }
     
     public void NotHit()
     {
         alreadyHit = false;
     }
+
+    public void ShedBlood()
+    {
+        //I HAVE NO TIME OK?
+        int number = Random.Range(0, 8);
+        var position = gameObject.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+        Instantiate(bloodTypes[number], position, Quaternion.identity);
+
+        number = Random.Range(0, 8);
+        position = gameObject.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+        Instantiate(bloodTypes[number], position, Quaternion.identity);
+
+        number = Random.Range(0, 8);
+        position = gameObject.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+        Instantiate(bloodTypes[number], position, Quaternion.identity);
+        
+        number = Random.Range(0, 8);
+        position = gameObject.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+        Instantiate(bloodTypes[number], position, Quaternion.identity);
+        
+        number = Random.Range(0, 8);
+        position = gameObject.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+        Instantiate(bloodTypes[number], position, Quaternion.identity);
+        
+        Destroy(this.gameObject);
+  
+    }
+    
 }

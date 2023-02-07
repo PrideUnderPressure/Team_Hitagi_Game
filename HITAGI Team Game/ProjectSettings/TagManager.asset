@@ -17,6 +17,8 @@ TagManager:
   - Zombie_World
   - Z_Melee_Attack
   - Spawner
+  - Floor
+  - Water
   layers:
   - Default
   - TransparentFX
