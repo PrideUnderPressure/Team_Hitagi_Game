@@ -28,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     //SPRITE RENDERERS
     public SpriteRenderer sRBody;
     public SpriteRenderer sRGun;
+    public SpriteRenderer hitSprite;
     public GameObject gunObject;
     public Animator animeBody;
     public Animator animeGun;
@@ -50,6 +51,8 @@ public class Player_Controller : MonoBehaviour
     public GameObject world2;
 
     public bool inNormalWorld;
+    public SpriteRenderer spriteGun;
+
 
     void Start()
     {
@@ -59,6 +62,10 @@ public class Player_Controller : MonoBehaviour
         world2.SetActive(false);
 
         animeGun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Animator>();
+        spriteGun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<SpriteRenderer>();   
+        
+        hitSprite = GameObject.FindGameObjectWithTag("Hit_Sprite").GetComponent<SpriteRenderer>();
+        
         rigidBody = GetComponent<Rigidbody2D>();
         scriptRoll = gameObject.GetComponent<Roll>();
         scriptShooting = objectShooting.GetComponent<Shooting>();
@@ -68,6 +75,8 @@ public class Player_Controller : MonoBehaviour
         sRGun = gunObject.GetComponent<SpriteRenderer>();
 
         scriptShooting.onShoot.AddListener(() => { aniScript.Shot(shotAngle); });
+
+        hitSprite.enabled = false;
     }
 
     void Update()
@@ -235,6 +244,23 @@ public class Player_Controller : MonoBehaviour
         {
             gameObject.GetComponent<Player_Stats>().canDamage = false;
         }
+    }
+
+    public void Blink()
+    {
+        StartCoroutine(BlinkOnHit());
+    }
+    IEnumerator BlinkOnHit()
+    {
+        spriteGun.enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        hitSprite.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        hitSprite.enabled = false;
+        spriteGun.enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
+
     }
 }
 

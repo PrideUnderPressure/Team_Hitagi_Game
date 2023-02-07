@@ -19,6 +19,7 @@ TagManager:
   - Spawner
   - Floor
   - Water
+  - Hit_Sprite
   layers:
   - Default
   - TransparentFX

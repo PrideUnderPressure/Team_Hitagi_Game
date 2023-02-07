@@ -101,7 +101,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 7
-  deathTimer: 0
+  deathTimer: 2
+  alreadyHit: 0
+  shootingScript: {fileID: 0}
+  damage: 0
+  notShotgun: 1
 --- !u!50 &7244012762998526667
 Rigidbody2D:
   serializedVersion: 4

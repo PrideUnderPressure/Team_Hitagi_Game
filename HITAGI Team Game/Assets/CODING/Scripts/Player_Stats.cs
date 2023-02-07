@@ -8,24 +8,32 @@ public class Player_Stats : MonoBehaviour
     public float health;
     public Rigidbody2D rb;
     public bool canDamage;
+    public bool damageCd;
 
     void Start()
     {
+        damageCd = false;
         health = maxHealth;
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     public void IsHit(float damage)
     {
-        if (canDamage && health - damage >= 0)
+        if (damageCd == false)
         {
-            Debug.Log("@HITTTTTTT");
-            health -= damage;
-            rb.velocity = Vector2.zero;
-        }
-        else if (canDamage && health - damage < 0)
-        {
-            PlayerDeath();
+            if (canDamage && health - damage >= 0)
+            {
+                gameObject.GetComponent<Player_Controller>().Blink();
+                Debug.Log("@HITTTTTTT");
+                health -= damage;
+                rb.velocity = Vector2.zero;
+                damageCd = true;
+                StartCoroutine(DamageCD());
+            }
+            else if (canDamage && health - damage < 0)
+            {
+                PlayerDeath();
+            }
         }
     }
 
@@ -33,5 +41,11 @@ public class Player_Stats : MonoBehaviour
     {
         Debug.Log("U DEAD YO");
         
+    }
+
+    IEnumerator DamageCD()
+    {
+        yield return new WaitForSeconds(0.5f);
+        damageCd = false;
     }
 }

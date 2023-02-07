@@ -10,12 +10,14 @@ public class BulletScript : MonoBehaviour
     private Rigidbody2D rb;
     public float force;
     private Animator animator;
-    public float deathTimer;
+    public float deathTimer = 1f;
 
     public bool alreadyHit;
 
     public Shooting shootingScript;
     public float damage;
+
+    public bool isShotgun;
     void Start()
     {
         shootingScript = GameObject.FindGameObjectWithTag("Shooting_Object").GetComponent<Shooting>();
@@ -31,6 +33,7 @@ public class BulletScript : MonoBehaviour
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
         alreadyHit = false;
+        StartCoroutine(TimerDestroy());
     }
 
     // Update is called once per frame
@@ -41,7 +44,31 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (alreadyHit == false)
+        if (isShotgun == false)
+        {
+            if (alreadyHit == false)
+            {
+                if (other.gameObject.tag == "Zombie")
+                {
+                    rb.velocity = new Vector2(0, 0).normalized * force;
+                    animator.SetTrigger("IsHit");
+                    GameObject zombie = other.gameObject;
+                    zombie.GetComponent<Agent>().Hit();
+                    zombie.GetComponent<Agent>().Chase();
+                    zombie.GetComponent<Stats>().Damage(damage);
+                    alreadyHit = true;
+
+                }
+                else if (other.gameObject.tag == "Walls")
+                {
+                    rb.velocity = new Vector2(0, 0).normalized * force;
+                    animator.SetTrigger("IsHit");
+                    alreadyHit = true;
+                }
+            }
+        }
+        
+        if (isShotgun)
         {
             if (other.gameObject.tag == "Zombie")
             {
@@ -51,14 +78,11 @@ public class BulletScript : MonoBehaviour
                 zombie.GetComponent<Agent>().Hit();
                 zombie.GetComponent<Agent>().Chase();
                 zombie.GetComponent<Stats>().Damage(damage);
-                alreadyHit = true;
-                
             }
             else if (other.gameObject.tag == "Walls")
             {
                 rb.velocity = new Vector2(0, 0).normalized * force;
                 animator.SetTrigger("IsHit");
-                alreadyHit = true;
             }
         }
 
@@ -66,6 +90,13 @@ public class BulletScript : MonoBehaviour
 
     void Destroy()
     {
+        if (isShotgun == false)
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator TimerDestroy()
+    {
+        yield return new WaitForSeconds(deathTimer);
         Destroy(this.gameObject);
     }
 }

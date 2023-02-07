@@ -8,6 +8,10 @@ public class Shooting : MonoBehaviour
     private Camera mainCam;
     private Vector3 mousePos;
     public GameObject bullet;
+    public GameObject bulletShotgun;
+
+    public GameObject activeBullet;
+    
     public Transform bulletTransform;
     public SpriteRenderer muzzleFlash;
     public bool canFire;
@@ -69,7 +73,7 @@ public class Shooting : MonoBehaviour
                 StartCoroutine(MuzzleFlash());
                 _audioSource.PlayOneShot(_audioSource.clip, 1f);
                 canFire = false;
-                Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+                Instantiate(activeBullet, bulletTransform.position, Quaternion.identity);
             }
         }
 
