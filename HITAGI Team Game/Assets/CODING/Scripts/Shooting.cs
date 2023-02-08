@@ -83,10 +83,13 @@ public class Shooting : MonoBehaviour
 
     public IEnumerator MuzzleFlash()
     {
-        muzzleFlash.enabled = true;
-        yield return new WaitForSeconds(0.1f);
-        muzzleFlash.enabled = false;
-        
+        if (fireLocked != true)
+        {
+            muzzleFlash.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+            muzzleFlash.enabled = false;
+        }
+
     }
 
     public void DamageSwitch(float x)

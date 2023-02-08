@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunControllers:
-  - {fileID: 9100000, guid: 695136228f34f454fb988f0bc911e9b7, type: 2}
+  - {fileID: 9100000, guid: 24be8dcfe4a388f45beca19e5153d7d0, type: 2}
   - {fileID: 9100000, guid: 695136228f34f454fb988f0bc911e9b7, type: 2}
   - {fileID: 9100000, guid: 3bfced7a46dc9784eb09207588efbf13, type: 2}
   - {fileID: 9100000, guid: b40de0f2732cf0743b27e509d0972072, type: 2}
@@ -634,6 +634,7 @@ MonoBehaviour:
   maxDmg2: 0
   maxAmmo: 0
   ammo: 0
+  fireLocked: 0
 --- !u!82 &4551650584729258519
 AudioSource:
   m_ObjectHideFlags: 0
@@ -991,13 +992,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunPrefabsToSpawn:
-  - {fileID: 0}
+  - {fileID: 7019343341894126246, guid: a52f62542e10e73409f21ae8aaee40f4, type: 3}
   - {fileID: 7019343341894126246, guid: 2b4436a1491899442a3f5b7b24227d86, type: 3}
   - {fileID: 5936874460121857491, guid: a1448fd7c211e3d40924c42f8b419cf7, type: 3}
   - {fileID: 5936874460121857491, guid: 28fa679c332bf9c4486f8f1b78a39658, type: 3}
-  weaponSlot1: 0
-  weaponSlot2: 0
+  weaponSlot1: 5
+  weaponSlot2: 5
   usedWeapon: 0
+  objectShooting: {fileID: 4551650584729258514}
+  scriptShooting: {fileID: 0}
 --- !u!1 &4551650585413126069
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,15 @@ public class WeaponSwap : MonoBehaviour
         {
             scriptShooting.fireLocked = true;
         }
-        
+        if (weaponSlot1 != 0 && usedWeapon == 1)
+        {
+            scriptShooting.fireLocked = false;
+        }
+
+        if (weaponSlot2 != 0 && usedWeapon == 2)
+        {
+            scriptShooting.fireLocked = false;
+        }
     }
 
     public void CarriedWeapon1()
@@ -63,11 +71,7 @@ public class WeaponSwap : MonoBehaviour
         if (x != weaponSlot1 && weaponSlot1 == 5)
         {
             weaponSlot1 = x;
-
-            if (weaponSlot1 != 0)
-            {
-                scriptShooting.fireLocked = false;
-            }
+            
         }
         else if (x != weaponSlot2 && x != weaponSlot1)
         {
