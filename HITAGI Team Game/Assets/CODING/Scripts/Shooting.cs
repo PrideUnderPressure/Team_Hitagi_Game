@@ -31,7 +31,7 @@ public class Shooting : MonoBehaviour
     public float maxDmg2;
     public int maxAmmo;
     public float ammo;
-
+    public bool fireLocked;
 
     void Start()
     {
@@ -67,7 +67,8 @@ public class Shooting : MonoBehaviour
                     timer = 0;
                 }
             }
-            if (Input.GetMouseButton(0) && canFire)
+
+            if (Input.GetMouseButton(0) && canFire && fireLocked != true) 
             {
                 onShoot.Invoke();
                 StartCoroutine(MuzzleFlash());

@@ -53,6 +53,7 @@ public class Player_Controller : MonoBehaviour
     public bool inNormalWorld;
     public SpriteRenderer spriteGun;
 
+    public int activeWeapon;
 
     void Start()
     {
@@ -106,7 +107,7 @@ public class Player_Controller : MonoBehaviour
                 disableInputs = false;
             }
         }
-
+        
     }
 
     public void InitiateWarp()
@@ -163,7 +164,16 @@ public class Player_Controller : MonoBehaviour
         {
             scriptRoll.DoRoll();
         }
-
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gameObject.GetComponent<WeaponSwap>().CarriedWeapon1();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gameObject.GetComponent<WeaponSwap>().CarriedWeapon2();
+        }
+        
         if (mousePosInRelationY > -0.22 && mousePosInRelationY < 0.22)
         {
             shotAngle = 1;
@@ -178,7 +188,7 @@ public class Player_Controller : MonoBehaviour
         {
             shotAngle = 3;
         }
-
+        
 
     }
 
@@ -250,6 +260,7 @@ public class Player_Controller : MonoBehaviour
     {
         StartCoroutine(BlinkOnHit());
     }
+    
     IEnumerator BlinkOnHit()
     {
         spriteGun.enabled = false;
@@ -262,5 +273,8 @@ public class Player_Controller : MonoBehaviour
 
 
     }
+
+
+    
 }
 

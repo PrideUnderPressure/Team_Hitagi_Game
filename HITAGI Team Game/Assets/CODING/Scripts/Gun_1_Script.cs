@@ -26,6 +26,7 @@ public class Gun_1_Script : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            other.GetComponent<WeaponSwap>().WeaponPickup(whichToSwitch);
             gun.SwitchGun(whichToSwitch);
             shootScript.timeBetweenFiring = firerate;
             shootScript.DamageSwitch(maxDamage);
