@@ -167,11 +167,11 @@ public class Player_Controller : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            gameObject.GetComponent<WeaponSwap>().CarriedWeapon1();
+            gameObject.GetComponent<WeaponSwap>().CarriedWeapon1(false);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            gameObject.GetComponent<WeaponSwap>().CarriedWeapon2();
+            gameObject.GetComponent<WeaponSwap>().CarriedWeapon2(false);
         }
         
         if (mousePosInRelationY > -0.22 && mousePosInRelationY < 0.22)

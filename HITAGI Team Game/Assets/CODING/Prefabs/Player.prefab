@@ -517,7 +517,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -602204195, guid: 85ec5460365fd32418499327f7b720d3, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -525,7 +525,7 @@ SpriteRenderer:
   m_Size: {x: 0.4, y: 0.35}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &4551650584124569390
@@ -538,7 +538,7 @@ Animator:
   m_GameObject: {fileID: 4551650584124569389}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 695136228f34f454fb988f0bc911e9b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 24be8dcfe4a388f45beca19e5153d7d0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -996,11 +996,19 @@ MonoBehaviour:
   - {fileID: 7019343341894126246, guid: 2b4436a1491899442a3f5b7b24227d86, type: 3}
   - {fileID: 5936874460121857491, guid: a1448fd7c211e3d40924c42f8b419cf7, type: 3}
   - {fileID: 5936874460121857491, guid: 28fa679c332bf9c4486f8f1b78a39658, type: 3}
-  weaponSlot1: 5
-  weaponSlot2: 5
-  usedWeapon: 0
+  weaponSlot1: 0
+  weaponSlot2: 0
+  usedWeapon: 1
   objectShooting: {fileID: 4551650584729258514}
   scriptShooting: {fileID: 0}
+  pickupFirepower: 0
+  pickupMaxDamage: 0
+  fireRate1: 0
+  maxDamage1: 0
+  fireRate2: 0
+  maxDamage2: 0
+  gun: {fileID: 0}
+  canSwap: 1
 --- !u!1 &4551650585413126069
 GameObject:
   m_ObjectHideFlags: 0

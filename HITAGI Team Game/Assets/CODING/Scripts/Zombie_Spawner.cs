@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Zombie_Spawner : MonoBehaviour
 {
+    private NavMeshAgent agent;
     public GameObject whatToSpawn1;
     public int howMany1;
     public GameObject whatToSpawn2;
@@ -18,6 +20,9 @@ public class Zombie_Spawner : MonoBehaviour
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
         whereVector3 = where.transform.position;
     }
     
@@ -25,7 +30,8 @@ public class Zombie_Spawner : MonoBehaviour
     {
         for(int i = 0; i < howMany1; i++)
         {
-            Instantiate(whatToSpawn1);
+            GameObject spawned = Instantiate(whatToSpawn1);
+            spawned.GetComponent<NavMeshAgent>().Warp(whereVector3);
 
         }
     }

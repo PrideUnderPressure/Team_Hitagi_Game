@@ -8,9 +8,9 @@ public class Gun_1_Script : MonoBehaviour
     public GameObject player;
     public Player_Gun_Script gun;
     public Shooting shootScript;
+    
     public int whichToSwitch;
     public float firerate;
-    //Maybe random damage? between minDamage and maxDamage (like 3-6 dmg)
     public float maxDamage;
     public float maxAmmo;
 
@@ -22,14 +22,12 @@ public class Gun_1_Script : MonoBehaviour
         shootScript = player.GetComponent<Shooting>();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<WeaponSwap>().WeaponPickup(whichToSwitch);
-            gun.SwitchGun(whichToSwitch);
-            shootScript.timeBetweenFiring = firerate;
-            shootScript.DamageSwitch(maxDamage);
+            other.GetComponent<WeaponSwap>().WeaponPickup(whichToSwitch, firerate, maxDamage);
+
             Destroy(transform.parent.gameObject);
         }
     }

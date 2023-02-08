@@ -19,73 +19,104 @@ public class WeaponSwap : MonoBehaviour
     public GameObject objectShooting;
     public Shooting scriptShooting;
 
+    public float pickupFirepower;
+    public float pickupMaxDamage;
+    public float fireRate1 = 0;
+    public float maxDamage1;
+    public float fireRate2 = 0;
+    public float maxDamage2;
+    
+    public Player_Gun_Script gun;
+
+    public bool canSwap = true;
     //Activated by the Player Script Input.1
     void Start()
     {
         scriptShooting = objectShooting.GetComponent<Shooting>();
+        gun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Player_Gun_Script>();
+        gun.SwitchGun(weaponSlot1);
+        WeaponPickup(0, 0, 0);
+
     }
     private void FixedUpdate()
     {
-        whereToSpawn = gameObject.transform.position;
-        if (usedWeapon == 1 && weaponSlot1 == 0)
+        if (usedWeapon == 1 && weaponSlot1 == 0 && scriptShooting.fireLocked != true)
         {
             scriptShooting.fireLocked = true;
         }
-        if (usedWeapon == 2 && weaponSlot2 == 0)
+        if (usedWeapon == 2 && weaponSlot2 == 0 && scriptShooting.fireLocked != true)
         {
             scriptShooting.fireLocked = true;
         }
-        if (weaponSlot1 != 0 && usedWeapon == 1)
+        if (weaponSlot1 != 0 && usedWeapon == 1 && scriptShooting.fireLocked != false)
         {
             scriptShooting.fireLocked = false;
         }
 
-        if (weaponSlot2 != 0 && usedWeapon == 2)
+        if (weaponSlot2 != 0 && usedWeapon == 2 && scriptShooting.fireLocked != false)
         {
             scriptShooting.fireLocked = false;
         }
     }
 
-    public void CarriedWeapon1()
+    public void CarriedWeapon1(bool pickup)
     {
-        if (usedWeapon != 1)
+        if (usedWeapon != 1 && canSwap || pickup)
         {
-            Instantiate(gunPrefabsToSpawn[weaponSlot1], whereToSpawn, Quaternion.identity);
-            usedWeapon = 1;
-
+                usedWeapon = 1;
+                scriptShooting.timeBetweenFiring = fireRate1;
+                scriptShooting.DamageSwitch(maxDamage1);
+                scriptShooting.canFire = true;
+                gun.SwitchGun(weaponSlot1);
+                canSwap = false;
+                StartCoroutine(SwapCd());
         }
     }
     //Activated by the Player Script Input.2
-    public void CarriedWeapon2()
+    public void CarriedWeapon2(bool pickup)
     {
-        if (usedWeapon != 2)
+        if (usedWeapon != 2 && canSwap || pickup)
         {
-            Instantiate(gunPrefabsToSpawn[weaponSlot2], whereToSpawn, Quaternion.identity);
-            usedWeapon = 2;
+                usedWeapon = 2;
+                scriptShooting.timeBetweenFiring = fireRate2;
+                scriptShooting.DamageSwitch(maxDamage2);
+                gun.SwitchGun(weaponSlot2);
+                scriptShooting.canFire = true;
+                canSwap = false;
+                StartCoroutine(SwapCd());
+
         }
     }
     //Activated by the WEAPON PREFAB upon picking up
-    public void WeaponPickup(int x)
+    public void WeaponPickup(int x, float fireRate, float maxDamage)
     {
         //x is the gun number, set when the player activates a gun on the ground (picks it up)
-        if (x != weaponSlot1 && weaponSlot1 == 5)
+        if (usedWeapon == 1)
         {
-            weaponSlot1 = x;
-            
-        }
-        else if (x != weaponSlot2 && x != weaponSlot1)
-        {
-            weaponSlot2 = x;
-            
-            if (weaponSlot2 != 0)
+            if (x != weaponSlot1)
             {
-                scriptShooting.fireLocked = false;
+                weaponSlot1 = x;
+                fireRate1 = fireRate;
+                maxDamage1 = maxDamage;
+                CarriedWeapon1(true);
+            }
+
+        }
+        if (usedWeapon == 2)
+        {
+            if (x != weaponSlot2)
+            {
+                weaponSlot2 = x;
+                fireRate2 = fireRate;
+                maxDamage2 = maxDamage;
+                CarriedWeapon2(true);
             }
         }
     }
 
-    public void WeaponSwaping()
+    IEnumerator SwapCd()
     {
-        
+        yield return new WaitForSeconds(0.1f);
+        canSwap = true;
     }
 }
