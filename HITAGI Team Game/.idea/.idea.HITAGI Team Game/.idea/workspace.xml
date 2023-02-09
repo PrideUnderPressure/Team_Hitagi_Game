@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/Agent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/LevelDataHolder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/MedpackScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/PortalScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/TutorialBullesScript.cs" root0="FORCE_HIGHLIGHTING" />
@@ -43,7 +44,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../Build.04/HITAGI Team Game.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../Build.07\HITAGI Team Game.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\usr\Desktop\Github_Folder\Team_Hitagi_Game\Build.02" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -104,7 +105,7 @@
       <workItem from="1675780690444" duration="11956000" />
       <workItem from="1675854032887" duration="18118000" />
       <workItem from="1675888338526" duration="21173000" />
-      <workItem from="1675944548959" duration="7952000" />
+      <workItem from="1675944548959" duration="14723000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class PortalScript : MonoBehaviour
 {
@@ -14,9 +15,13 @@ public class PortalScript : MonoBehaviour
     public Transform whereToTeleportObject;
     public Vector3 whereToTeleport;
     public bool isInCircle = false;
+    
+    public MeshRenderer textRenderer;
+    public bool isBigDaddy = false;
     void Start()
     {
         whereToTeleport = whereToTeleportObject.position;
+        textRenderer.enabled = false;
     }
 
     private void Update()
@@ -25,27 +30,39 @@ public class PortalScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                playerController.moveX = 0;
-                playerController.moveY = 0;
-                isHolding = true;
-                Debug.Log("startedHolding");
-                StartCoroutine(Wait());
+                if (isBigDaddy != true)
+                {
+                    playerController.moveX = 0;
+                    playerController.moveY = 0;
+                    isHolding = true;
+                    Debug.Log("startedHolding");
+                    StartCoroutine(Wait());
+                }
+                if (isBigDaddy != false)
+                {
+                    playerController.moveX = 0;
+                    playerController.moveY = 0;
+                    isHolding = true;
+                    Debug.Log("startedHolding");
+                    StartCoroutine(WaitToExit());
+                }
             }
             if (Input.GetKeyUp(KeyCode.F))
             {
                 isHolding = false;
-                playerController.disableInputs = true;
+                playerController.disableInputs = false;
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             playerController = other.gameObject.GetComponent<Player_Controller>();
             playerObject = other.gameObject;
             isInCircle = true;
+            textRenderer.enabled = true;
         }
     }
 
@@ -55,6 +72,7 @@ public class PortalScript : MonoBehaviour
         {
             isHolding = false;
             isInCircle = false;
+            textRenderer.enabled = false;
         }
     }
 
@@ -74,6 +92,15 @@ public class PortalScript : MonoBehaviour
             Debug.Log("HELDDDDDDD");
             playerObject.transform.position = (whereToTeleport);
             playerController.disableInputs = false;
+            playerObject.GetComponent<LevelDataHolder>().portalCount++;
+            Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator WaitToExit()
+    {
+        playerController.disableInputs = true;
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(1);
     }
 }

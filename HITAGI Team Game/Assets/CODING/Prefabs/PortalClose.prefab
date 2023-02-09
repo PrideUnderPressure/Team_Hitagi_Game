@@ -83,7 +83,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2222996014401140243}
-  m_Text: '[F] Close the portal
+  m_Text: 'Hold [F] to close the portal
 
 '
   m_OffsetZ: 0
@@ -306,6 +306,8 @@ MonoBehaviour:
   isHolding: 0
   whereToTeleportObject: {fileID: 9147615510925091286}
   whereToTeleport: {x: 0, y: 0, z: 0}
+  isInCircle: 0
+  textRenderer: {fileID: 672335429272334101}
 --- !u!58 &1973824466083334401
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ TagManager:
   - Hit_Sprite
   - Bridge
   - TutorialObject
+  - Exit
   layers:
   - Default
   - TransparentFX

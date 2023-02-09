@@ -16,6 +16,8 @@ public class Zombie_Ranged_Attack : MonoBehaviour
     [FormerlySerializedAs("canFire")] public bool canAttack;
     private float timer;
 
+    public SpriteRenderer muzzleSprite;
+
     public float timeBetweenFiring;
 
     public float mousePosX;
@@ -31,6 +33,7 @@ public class Zombie_Ranged_Attack : MonoBehaviour
 
     void Start()
     {
+        muzzleSprite.enabled = false;
         player = GameObject.FindGameObjectWithTag("Player");
         parentObject = gameObject.transform.parent.gameObject;
     }

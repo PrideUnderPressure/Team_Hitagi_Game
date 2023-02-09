@@ -265,6 +265,7 @@ MonoBehaviour:
   bulletTransform: {fileID: 4304381662362994771}
   zombieAttack: {fileID: 0}
   canAttack: 0
+  muzzleSprite: {fileID: 4092979493315639405}
   timeBetweenFiring: 0
   mousePosX: 0
   mousePosY: 0
