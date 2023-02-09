@@ -20,6 +20,8 @@ TagManager:
   - Floor
   - Water
   - Hit_Sprite
+  - Bridge
+  - TutorialObject
   layers:
   - Default
   - TransparentFX

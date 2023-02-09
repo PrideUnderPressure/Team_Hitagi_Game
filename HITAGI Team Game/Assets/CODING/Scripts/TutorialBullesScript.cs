@@ -10,10 +10,17 @@ public class TutorialBullesScript : MonoBehaviour
     public MeshRenderer meshRenderer;
     public TextMesh textMesh;
 
+    public WeaponSwap playerWeaponSwap;
+    public Collider2D playerCollider;
+
+
     public int tutorialStep = 1;
+    public bool show3 = false;
     void Start()
     {
         meshRenderer.sortingOrder = 50;
+        playerWeaponSwap = gameObject.transform.parent.GetComponent<WeaponSwap>();
+        playerCollider = gameObject.transform.parent.GetComponent<CapsuleCollider2D>();
     }
 
     private void Update()
@@ -28,16 +35,22 @@ public class TutorialBullesScript : MonoBehaviour
                 StartCoroutine(Wait(1));
                 tutorialStep = 2;
             }
-            break; 
+            break;
 
-                
             case 2:
-                BubbleOn("[F] WEAPON PICKUP");
-                if (Input.GetKeyDown(KeyCode.F))
+                BubbleOn("NOW PICK UP A WEAPON");
+                if (playerWeaponSwap.weaponSlot1 != 0 || playerWeaponSwap.weaponSlot2 != 0)
                 {
                     StartCoroutine(Wait(1));
                     BubbleOff();
                     tutorialStep = 3;
+                }
+                break;
+            
+            case 3:
+                if (show3)
+                {
+                    BubbleOn("HOLD [Q] TO\nWORLD WARP");
                 }
                 break;
 
@@ -66,4 +79,6 @@ public class TutorialBullesScript : MonoBehaviour
     {
         yield return new WaitForSeconds(x);
     }
+
+
 }

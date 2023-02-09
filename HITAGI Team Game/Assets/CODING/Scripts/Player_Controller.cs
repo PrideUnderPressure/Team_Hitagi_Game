@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -54,6 +55,8 @@ public class Player_Controller : MonoBehaviour
     public SpriteRenderer spriteGun;
 
     public int activeWeapon;
+    
+    public TutorialBullesScript tutorialScript;
 
     void Start()
     {
@@ -78,7 +81,8 @@ public class Player_Controller : MonoBehaviour
         scriptShooting.onShoot.AddListener(() => { aniScript.Shot(shotAngle); });
 
         hitSprite.enabled = false;
-    }
+        
+}
 
     void Update()
     {
@@ -237,6 +241,21 @@ public class Player_Controller : MonoBehaviour
         playerPosY = transform.position.y;
         mousePosInRelationX = mousePosFloatX - playerPosX;
         mousePosInRelationY = mousePosFloatY - playerPosY;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.tag == "Bridge")
+        {
+            var tutorialObject = GameObject.FindGameObjectWithTag("TutorialObject");
+            tutorialScript = tutorialObject.GetComponent<TutorialBullesScript>();
+
+            if (tutorialScript.tutorialStep == 3)
+            {
+                tutorialScript.show3 = true;
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
