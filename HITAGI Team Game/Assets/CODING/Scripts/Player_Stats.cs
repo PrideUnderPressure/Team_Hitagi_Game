@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Stats : MonoBehaviour
 {
@@ -40,6 +42,7 @@ public class Player_Stats : MonoBehaviour
     public void PlayerDeath()
     {
         Debug.Log("U DEAD YO");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
 
@@ -48,4 +51,6 @@ public class Player_Stats : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         damageCd = false;
     }
+
+
 }

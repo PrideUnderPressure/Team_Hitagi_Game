@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/Agent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/MedpackScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/TutorialBullesScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/WeaponSwap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/ZombieBulletScript.cs" root0="FORCE_HIGHLIGHTING" />
@@ -102,7 +103,7 @@
       <workItem from="1675780690444" duration="11956000" />
       <workItem from="1675854032887" duration="18118000" />
       <workItem from="1675888338526" duration="21173000" />
-      <workItem from="1675944548959" duration="1803000" />
+      <workItem from="1675944548959" duration="3544000" />
     </task>
     <servers />
   </component>
