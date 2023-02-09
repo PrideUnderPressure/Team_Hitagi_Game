@@ -27,11 +27,17 @@ public class Agent : MonoBehaviour
     public float staggerTime;
 
     public GameObject attackVfx;
+    public Vector3 playerPos;
     public Player_Stats playerStatsScript;
     public bool alarm = false;
     public GameObject detector;
     public bool needsDetector;
     public bool isChaser;
+
+    public bool isRanged;
+    public float distanceToPlayer;
+    public bool onCd = false;
+    public bool isChasing = false;
     void Start()
     {
         playerStatsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Stats>();
@@ -43,8 +49,9 @@ public class Agent : MonoBehaviour
         agents = gameObject.GetComponent<NavMeshAgent>();
         sR = gameObject.GetComponent<SpriteRenderer>();
         alreadyHit = false;
+        
 
-    }
+}
 
     // Update is called once per frame
     void Update()
@@ -53,8 +60,10 @@ public class Agent : MonoBehaviour
         agentsY = agents.velocity.y;
         Flips();
         agent.SetDestination(target.position);
-        
-        
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        distanceToPlayer = Vector3.Distance(playerPos, transform.position);
+
+
     }
 
     void FixedUpdate()
@@ -68,19 +77,24 @@ public class Agent : MonoBehaviour
             animator.SetBool("IsRunning", false);
         }
 
-        if (alreadyHit)
-        {
-            timer += Time.deltaTime;
-            if (timer > staggerTime)
-            {
-                target = GameObject.FindGameObjectWithTag("Player").transform;
-                timer = 0;
-            }
-        }
-
         if (isChaser)
         {
             Chase();
+        } 
+        
+        if (distanceToPlayer > 1 && alreadyHit != true)
+        {
+            agent.isStopped = false;
+        }
+        
+        if (distanceToPlayer <= 1 && isRanged && alreadyHit != true)
+        {
+            agents.isStopped = true;
+            if (onCd != true)
+            {
+                StartCoroutine(RangedAttack());
+                onCd = true;
+            }
         }
     }
      public void Flips()
@@ -99,21 +113,30 @@ public class Agent : MonoBehaviour
 
     public void Hit()
     {
+        Debug.Log("IS HIT");
         target = this.gameObject.transform;
+        agents.isStopped = true;
         agents.velocity = Vector3.zero;
         alreadyHit = true;
     }
     public void NotHit()
     {
+        Debug.Log("NO HIT");
         alreadyHit = false;
+        agents.isStopped = false;
     }
 
     public void Chase()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        detector = gameObject.transform.GetChild(0).gameObject;
-        if (needsDetector)
-        detector.GetComponent<PlayerDetector>().alarm = true;
+        if (isChasing != true)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+            detector = gameObject.transform.GetChild(0).gameObject;
+            if (needsDetector)
+            {
+                detector.GetComponent<PlayerDetector>().alarm = true;
+            }
+        }
     }
 
     public void Attacked()
@@ -130,5 +153,22 @@ public class Agent : MonoBehaviour
         attackVfx.GetComponent<Attack_Vfx_Script>().attacked = false;
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
+    }
+
+    public IEnumerator RangedAttack()
+    {
+        animator.SetTrigger("IsAttacking");
+        yield return new WaitForSeconds(1f);
+        onCd = false;
+    }
+
+    public void RangedAttack2()
+    {
+        if (alreadyHit == false)
+        {
+            var shooting = gameObject.transform.GetChild(1).gameObject;
+            shooting.GetComponent<Zombie_Ranged_Attack>().RangedAttacking();
+            agents.isStopped = false;
+        }
     }
 }

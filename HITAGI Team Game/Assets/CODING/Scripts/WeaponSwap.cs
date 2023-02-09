@@ -102,8 +102,10 @@ public class WeaponSwap : MonoBehaviour
             }
 
         }
+
         if (usedWeapon == 2)
-        {
+
+    {
             if (x != weaponSlot2)
             {
                 weaponSlot2 = x;
