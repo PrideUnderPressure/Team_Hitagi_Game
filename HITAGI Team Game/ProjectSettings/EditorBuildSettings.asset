@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/SCENES/Michal/Menu.unity
+    guid: 994c305c19954b74daba90b3471f27c1
+  - enabled: 1
+    path: Assets/SCENES/Michal/Cinematic.unity
+    guid: b235e6a9278bded4281b01db1f73ef90
+  - enabled: 1
     path: Assets/SCENES/Empty_Level.unity
     guid: 380d4b9fc8b31f448a12b5eb06a20be5
   - enabled: 1

@@ -101,6 +101,6 @@ public class PortalScript : MonoBehaviour
     {
         playerController.disableInputs = true;
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

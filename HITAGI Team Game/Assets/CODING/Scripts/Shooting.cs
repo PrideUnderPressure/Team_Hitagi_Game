@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Shooting : MonoBehaviour
 {
+    
     private Camera mainCam;
     private Vector3 mousePos;
     public GameObject bullet;
@@ -32,9 +33,12 @@ public class Shooting : MonoBehaviour
     public int maxAmmo;
     public float ammo;
     public bool fireLocked;
+    
+    public List<AudioClip> gunSounds;
 
     void Start()
     {
+        
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         muzzleFlash = GameObject.FindGameObjectWithTag("Muzzle_Flash").GetComponent<SpriteRenderer>();
         muzzleFlash.enabled = false;
@@ -95,5 +99,11 @@ public class Shooting : MonoBehaviour
     public void DamageSwitch(float x)
     {
         maxDmg = x;
+    }
+    
+    
+    public void SwitchSound(int x)
+    {
+        _audioSource.clip = gunSounds[x];
     }
 }

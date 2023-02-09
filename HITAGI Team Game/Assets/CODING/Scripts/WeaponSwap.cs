@@ -66,6 +66,7 @@ public class WeaponSwap : MonoBehaviour
                 usedWeapon = 1;
                 scriptShooting.timeBetweenFiring = fireRate1;
                 scriptShooting.DamageSwitch(maxDamage1);
+                scriptShooting.SwitchSound(weaponSlot1);
                 scriptShooting.canFire = true;
                 gun.SwitchGun(weaponSlot1);
                 canSwap = false;
@@ -80,6 +81,7 @@ public class WeaponSwap : MonoBehaviour
                 usedWeapon = 2;
                 scriptShooting.timeBetweenFiring = fireRate2;
                 scriptShooting.DamageSwitch(maxDamage2);
+                scriptShooting.SwitchSound(weaponSlot2);
                 gun.SwitchGun(weaponSlot2);
                 scriptShooting.canFire = true;
                 canSwap = false;
