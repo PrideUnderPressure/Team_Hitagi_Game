@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class MedpackScript : MonoBehaviour
 {
+    public bool canPickup = false;
     void Start()
     {
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (other.GetComponent<Player_Stats>().health != 100)
+            canPickup = true;
+            var pStats = other.GetComponent<Player_Stats>();
+            if (pStats.health != 100 )
+            {
+                pStats.health += 25;
+                if (pStats.health > 100)
+                    pStats.health = 100;
                 Destroy(transform.parent.gameObject);
+            }
+            else if (pStats.health >= 100)
+            {
+                Debug.Log("DoNothing");
+            }
+
         }
     }
 
@@ -22,7 +35,7 @@ public class MedpackScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
+            canPickup = false;
         }
     }
 

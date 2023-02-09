@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7019343341850891399}
   - component: {fileID: 7019343341850891397}
   - component: {fileID: 1782718765073344932}
-  - component: {fileID: 1234883896772510086}
+  - component: {fileID: 2018523556570703006}
   m_Layer: 0
   m_Name: Gun_Sprite
   m_TagString: Untagged
@@ -222,7 +222,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1234883896772510086
+--- !u!114 &2018523556570703006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,18 +231,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7019343341850891451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ae10cce0803544ab43fd65e03e8a47, type: 3}
+  m_Script: {fileID: 11500000, guid: eb7e195d25942a742aee3df7c410d43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  gun: {fileID: 0}
-  shootScript: {fileID: 0}
-  whichToSwitch: 0
-  firerate: 0
-  maxDamage: 0
-  maxAmmo: 0
-  text: {fileID: 0}
-  textRenderer: {fileID: 0}
+  canPickup: 0
 --- !u!1 &7019343341894126246
 GameObject:
   m_ObjectHideFlags: 0
