@@ -7689,7 +7689,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 1}
+        - {x: -8, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 1}
       tessellationDetail: 0
       bones: []
       spriteID: a80bf6bf74249fb468ea772f75eed1ee
@@ -7710,7 +7714,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 1}
+        - {x: -8, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 1}
       tessellationDetail: 0
       bones: []
       spriteID: bdbe124373539e44889ad8f0986c8f30
@@ -17474,8 +17482,8 @@ TextureImporter:
       Tilemap_First_Proper_222: 1351828660
       Tilemap_First_Proper_441: -641909839
       Tilemap_First_Proper_688: 1302712246
-      Tilemap_First_Proper_438: 1360034327
       Tilemap_First_Proper_237: -1304638052
+      Tilemap_First_Proper_438: 1360034327
       Tilemap_First_Proper_478: -1726010874
       Tilemap_First_Proper_701: -263537531
       Tilemap_First_Proper_548: 1196160503

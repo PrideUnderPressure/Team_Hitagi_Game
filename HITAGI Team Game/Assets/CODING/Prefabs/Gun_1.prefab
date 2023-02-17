@@ -202,7 +202,7 @@ MonoBehaviour:
   shootScript: {fileID: 0}
   whichToSwitch: 1
   firerate: 0.5
-  maxDamage: 200
+  maxDamage: 400
   maxAmmo: 0
   text: {fileID: 0}
   textRenderer: {fileID: 6140212601493403539}

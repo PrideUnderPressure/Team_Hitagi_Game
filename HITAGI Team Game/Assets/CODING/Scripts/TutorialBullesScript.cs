@@ -16,6 +16,7 @@ public class TutorialBullesScript : MonoBehaviour
     
     public int tutorialStep = 1;
     public bool show3 = false;
+    public bool show4 = false;
 
     public bool tutorialOn = false;
     void Start()
@@ -48,7 +49,7 @@ public class TutorialBullesScript : MonoBehaviour
                     break;
 
                 case 2:
-                    BubbleOn("NOW PICK UP A WEAPON");
+                    BubbleOn("NOW PICK UP\nA WEAPON");
                     if (playerWeaponSwap.weaponSlot1 != 0 || playerWeaponSwap.weaponSlot2 != 0)
                     {
                         StartCoroutine(Wait(1));
@@ -62,9 +63,31 @@ public class TutorialBullesScript : MonoBehaviour
                     if (show3)
                     {
                         BubbleOn("HOLD [Q] TO\nWORLD WARP");
+                        tutorialStep = 4;
                     }
 
                     break;
+                
+                case 4:
+                    if (show4)
+                    {
+                        BubbleOff();
+                        BubbleOn("MOUSE TO SHOOT");
+                        if (Input.GetMouseButtonDown(0))
+                            tutorialStep = 5;
+                    }
+                    break;
+                
+                case 5:
+                        BubbleOff();
+                        BubbleOn("[SPACE] TO ROLL");
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            BubbleOff();
+                            tutorialStep = 6;
+                        }
+
+                        break;
             }
         }
 

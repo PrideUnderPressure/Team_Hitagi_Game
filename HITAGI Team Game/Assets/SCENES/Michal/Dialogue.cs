@@ -21,9 +21,17 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+	    if (index == 6)
+	    {
+		    WaitToSwitch();
+	    }
+        if(Input.GetMouseButtonDown(0) )
 	{
-	 if(textComponent.text == lines[index])
+		if (index == 6)
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		}
+	 else if(textComponent.text == lines[index])
 	{
 	 NextLine();
 	}
@@ -69,7 +77,7 @@ void NextLine()
 
 IEnumerator WaitToSwitch()
 {
-	yield return new WaitForSeconds(3);
+	yield return new WaitForSeconds(0.1f);
 	SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 }
 }

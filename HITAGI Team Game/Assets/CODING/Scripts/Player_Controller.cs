@@ -57,9 +57,12 @@ public class Player_Controller : MonoBehaviour
     public int activeWeapon;
     
     public TutorialBullesScript tutorialScript;
+    public GameObject tutorialObject;
+    public BGMControllerScript bgmScript;
 
     void Start()
     {
+        tutorialScript = tutorialObject.GetComponent<TutorialBullesScript>();
         inNormalWorld = true;
         world1 = GameObject.FindGameObjectWithTag("Normal_World");
         world2 = GameObject.FindGameObjectWithTag("Zombie_World");
@@ -129,7 +132,9 @@ public class Player_Controller : MonoBehaviour
     {
         if (inNormalWorld) ;
         {
+            tutorialScript.show4 = true;
             world1.SetActive(!inNormalWorld);
+            bgmScript.Switch(!true);
             world2.SetActive(inNormalWorld);
             Debug.Log("Warped");
         }
@@ -245,12 +250,8 @@ public class Player_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.gameObject.tag == "Bridge")
         {
-            var tutorialObject = GameObject.FindGameObjectWithTag("TutorialObject");
-            tutorialScript = tutorialObject.GetComponent<TutorialBullesScript>();
-
             if (tutorialScript.tutorialStep == 3)
             {
                 tutorialScript.show3 = true;
