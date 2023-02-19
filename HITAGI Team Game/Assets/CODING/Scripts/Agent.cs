@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Agent : MonoBehaviour
 {
     [SerializeField] Transform target;
@@ -38,8 +39,19 @@ public class Agent : MonoBehaviour
     public float distanceToPlayer;
     public bool onCd = false;
     public bool isChasing = false;
+
+    public List<AudioClip> attackSounds;
+    public AudioSource audioSource;
+    public int number;
+    
+    public List<RuntimeAnimatorController> zombieVariants;
     void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
+        int roll = Random.Range(0, 5);
+        animator.runtimeAnimatorController = zombieVariants[roll];
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.pitch = (Random.Range(0.6f, 1.3f));
         playerStatsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Stats>();
         target = this.gameObject.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -49,6 +61,7 @@ public class Agent : MonoBehaviour
         agents = gameObject.GetComponent<NavMeshAgent>();
         sR = gameObject.GetComponent<SpriteRenderer>();
         alreadyHit = false;
+        
         
 
 }
@@ -82,12 +95,12 @@ public class Agent : MonoBehaviour
             Chase();
         } 
         
-        if (distanceToPlayer > 1 && alreadyHit != true)
+        if (distanceToPlayer > 1.3 && alreadyHit != true)
         {
             agent.isStopped = false;
         }
         
-        if (distanceToPlayer <= 1 && isRanged && alreadyHit != true)
+        if (distanceToPlayer <= 1.3 && isRanged && alreadyHit != true)
         {
             agents.isStopped = true;
             if (onCd != true)
@@ -141,9 +154,14 @@ public class Agent : MonoBehaviour
 
     public void Attacked()
     {
+        //Roll for sound
+
         Debug.Log("CHUUUUUUUUUUJ");
         playerStatsScript.IsHit(gameObject.GetComponent<Stats>().damage);
-        target = this.gameObject.transform;
+        target = this.gameObject.transform; 
+        number = Random.Range(1, 3);
+        audioSource.PlayOneShot(attackSounds[number], 1f);
+
         StartCoroutine(Attacked2());
     }
 

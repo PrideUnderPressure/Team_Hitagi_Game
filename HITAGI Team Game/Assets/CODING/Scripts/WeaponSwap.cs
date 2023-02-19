@@ -30,12 +30,32 @@ public class WeaponSwap : MonoBehaviour
 
     public bool canSwap = true;
     //Activated by the Player Script Input.1
+    
+    //UI Guns
+    public GameObject gunUi1;
+    public GameObject gunUi2;
+    private GunUi gunUiScript1;
+    private GunUi gunUiScript2;
+    
+    //UI Boxes
+    public GameObject boxUi1;
+    public GameObject boxUi2;
+    private BoxUi boxUiScript1;
+    private BoxUi boxUiScript2;
+        
+        
     void Start()
     {
         scriptShooting = objectShooting.GetComponent<Shooting>();
         gun = GameObject.FindGameObjectWithTag("Selected_Gun").GetComponent<Player_Gun_Script>();
         gun.SwitchGun(weaponSlot1);
         WeaponPickup(0, 0, 0);
+
+        gunUiScript1 = gunUi1.GetComponent<GunUi>();
+        gunUiScript2 = gunUi2.GetComponent<GunUi>();
+        
+        boxUiScript1 = boxUi1.GetComponent<BoxUi>();
+        boxUiScript2 = boxUi2.GetComponent<BoxUi>();
 
     }
     private void FixedUpdate()
@@ -64,6 +84,8 @@ public class WeaponSwap : MonoBehaviour
         if (usedWeapon != 1 && canSwap || pickup)
         {
                 usedWeapon = 1;
+                boxUiScript1.Activate();
+                boxUiScript2.Deactivate();
                 scriptShooting.timeBetweenFiring = fireRate1;
                 scriptShooting.DamageSwitch(maxDamage1);
                 scriptShooting.SwitchSound(weaponSlot1);
@@ -79,6 +101,8 @@ public class WeaponSwap : MonoBehaviour
         if (usedWeapon != 2 && canSwap || pickup)
         {
                 usedWeapon = 2;
+                boxUiScript1.Deactivate();
+                boxUiScript2.Activate();
                 scriptShooting.timeBetweenFiring = fireRate2;
                 scriptShooting.DamageSwitch(maxDamage2);
                 scriptShooting.SwitchSound(weaponSlot2);
@@ -98,6 +122,7 @@ public class WeaponSwap : MonoBehaviour
             if (x != weaponSlot1)
             {
                 weaponSlot1 = x;
+                gunUiScript1.GunChange(x);
                 fireRate1 = fireRate;
                 maxDamage1 = maxDamage;
                 CarriedWeapon1(true);
@@ -111,6 +136,7 @@ public class WeaponSwap : MonoBehaviour
             if (x != weaponSlot2)
             {
                 weaponSlot2 = x;
+                gunUiScript2.GunChange(x);
                 fireRate2 = fireRate;
                 maxDamage2 = maxDamage;
                 CarriedWeapon2(true);

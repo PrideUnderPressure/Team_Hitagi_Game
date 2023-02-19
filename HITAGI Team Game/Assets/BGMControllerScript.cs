@@ -8,7 +8,7 @@ public class BGMControllerScript : MonoBehaviour
     public AudioSource bgmSource;
     void Start()
     {
-        bgmSource.clip = bgmList[1];
+        bgmSource.clip = bgmList[0];
         bgmSource.Play();
     }
 
@@ -20,17 +20,6 @@ public class BGMControllerScript : MonoBehaviour
 
     public void Switch(bool x)
     {
-        if (x == true)
-        {
-            bgmSource.Stop();
-            bgmSource.clip = bgmList[1];
-            bgmSource.Play();
-        }
-        if (x == false)
-        {
-            bgmSource.Stop();
-            bgmSource.clip = bgmList[0];
-            bgmSource.Play();
-        }
+        int y = 1;
     }
 }

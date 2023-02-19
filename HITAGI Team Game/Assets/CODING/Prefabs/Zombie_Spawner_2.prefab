@@ -108,6 +108,7 @@ MonoBehaviour:
   howMany3: 0
   where: {fileID: 6417435436173371400}
   whereVector3: {x: 0, y: 0, z: 0}
+  screamSound: {fileID: 9165877574473175313, guid: 6ef693736bfa1324c9a11385627c5857, type: 3}
 --- !u!195 &5127974834581635897
 NavMeshAgent:
   m_ObjectHideFlags: 0

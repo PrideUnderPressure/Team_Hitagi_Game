@@ -18,7 +18,7 @@ public class MedpackScript : MonoBehaviour
             var pStats = other.GetComponent<Player_Stats>();
             if (pStats.health != 100 )
             {
-                pStats.health += 25;
+                pStats.health += 30;
                 if (pStats.health > 100)
                     pStats.health = 100;
                 Destroy(transform.parent.gameObject);

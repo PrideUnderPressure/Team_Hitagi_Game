@@ -17,6 +17,8 @@ public class Zombie_Spawner : MonoBehaviour
     public GameObject where;
     public Vector3 whereVector3;
 
+    public GameObject screamSound;
+    
 
     void Start()
     {
@@ -55,6 +57,8 @@ public class Zombie_Spawner : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Spawn1();
+            GameObject scream = Instantiate(screamSound);
+            scream.transform.position = whereVector3;
             //Spawn2();
             //Spawn3();
             Destroy(this.gameObject);

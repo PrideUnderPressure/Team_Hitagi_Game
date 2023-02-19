@@ -18,9 +18,12 @@ public class PortalScript : MonoBehaviour
     
     public MeshRenderer textRenderer;
     public bool isBigDaddy = false;
+
+    public AudioSource audioSource;
     void Start()
     {
         whereToTeleport = whereToTeleportObject.position;
+        audioSource = gameObject.GetComponent<AudioSource>();
         textRenderer.enabled = false;
     }
 
@@ -51,6 +54,7 @@ public class PortalScript : MonoBehaviour
             {
                 isHolding = false;
                 playerController.disableInputs = false;
+                audioSource.pitch = 1f;
             }
         }
     }
@@ -73,6 +77,7 @@ public class PortalScript : MonoBehaviour
             isHolding = false;
             isInCircle = false;
             textRenderer.enabled = false;
+            audioSource.pitch = 1f;
         }
     }
 
@@ -86,14 +91,30 @@ public class PortalScript : MonoBehaviour
     {
         Debug.Log("Wait Begun");
         playerController.disableInputs = true;
-        yield return new WaitForSeconds(3f);
+        audioSource.PlayOneShot(audioSource.clip, 1f);
+        yield return new WaitForSeconds(1f);
+        audioSource.pitch = 1.2f;
         if (isHolding)
         {
-            Debug.Log("HELDDDDDDD");
-            playerObject.transform.position = (whereToTeleport);
-            playerController.disableInputs = false;
-            playerObject.GetComponent<LevelDataHolder>().portalCount++;
-            Destroy(this.gameObject);
+            audioSource.PlayOneShot(audioSource.clip, 1f);
+            yield return new WaitForSeconds(1f);
+
+            if (isHolding)
+            {
+                audioSource.pitch = 1.4f;
+                audioSource.PlayOneShot(audioSource.clip, 1f);
+                yield return new WaitForSeconds(1f);
+
+
+                if (isHolding)
+                {
+                    Debug.Log("HELDDDDDDD");
+                    playerObject.transform.position = (whereToTeleport);
+                    playerController.disableInputs = false;
+                    playerObject.GetComponent<LevelDataHolder>().portalCount++;
+                    Destroy(this.gameObject);
+                }
+            }
         }
     }
 

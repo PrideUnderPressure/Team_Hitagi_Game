@@ -21,6 +21,9 @@ public class Stats : MonoBehaviour
     public List<GameObject> bloodTypes;
     public int bloodIndex;
     
+    //For Death Audio Splash
+    public GameObject splashPrefab;
+    
 
 
 
@@ -49,6 +52,7 @@ public class Stats : MonoBehaviour
         else if (health - x <= 0)
         {
             Destroy(gameObject.GetComponent<CapsuleCollider2D>());
+            Instantiate(splashPrefab, gameObject.transform.position, Quaternion.identity);
             animator.SetTrigger("IsDead");
         }
     }

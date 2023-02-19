@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class Player_Controller : MonoBehaviour
     public TutorialBullesScript tutorialScript;
     public GameObject tutorialObject;
     public BGMControllerScript bgmScript;
+    
 
     void Start()
     {
@@ -96,7 +98,14 @@ public class Player_Controller : MonoBehaviour
             Inputs();
             Flips();
         }
-
+        
+        if (Input.GetKey(KeyCode.Q))
+        {
+            scriptShooting.fireLocked = true;
+            scriptShooting.canFire = false;
+            scriptShooting.notRolling = false;
+        }
+        
         if (disableWarp != true)
         {
             if (Input.GetKeyDown(KeyCode.Q))
@@ -112,6 +121,9 @@ public class Player_Controller : MonoBehaviour
                 animeBody.SetBool("IsWarping", false);
                 animeGun.SetBool("IsWarping", false);
                 disableInputs = false;
+                scriptShooting.fireLocked = false;
+                scriptShooting.canFire = true;
+                scriptShooting.notRolling = true;
             }
         }
         
@@ -120,6 +132,9 @@ public class Player_Controller : MonoBehaviour
     public void InitiateWarp()
     {
         disableInputs = true;
+        scriptShooting.fireLocked = true;
+        scriptShooting.canFire = false;
+        scriptShooting.notRolling = false;
         warping = true;
         moveX = 0;
         moveY = 0;
@@ -146,6 +161,10 @@ public class Player_Controller : MonoBehaviour
         }*/
         inNormalWorld = !inNormalWorld;
         disableInputs = false;
+        scriptShooting.fireLocked = false;
+        scriptShooting.canFire = true;
+        scriptShooting.notRolling = true;
+        
     }
 
     void FixedUpdate()
@@ -290,11 +309,6 @@ public class Player_Controller : MonoBehaviour
         hitSprite.enabled = false;
         spriteGun.enabled = true;
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
-
-
     }
-
-
-    
 }
 
