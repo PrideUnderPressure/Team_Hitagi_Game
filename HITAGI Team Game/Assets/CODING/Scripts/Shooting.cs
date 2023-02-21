@@ -76,7 +76,12 @@ public class Shooting : MonoBehaviour
             {
                 onShoot.Invoke();
                 StartCoroutine(MuzzleFlash());
+                if (_audioSource.clip == gunSounds[2])
+                {
+                    _audioSource.pitch = Random.Range(0.9f, 1f);
+                }
                 _audioSource.PlayOneShot(_audioSource.clip, 1f);
+                
                 canFire = false;
                 Instantiate(activeBullet, bulletTransform.position, Quaternion.identity);
             }
@@ -105,5 +110,7 @@ public class Shooting : MonoBehaviour
     public void SwitchSound(int x)
     {
         _audioSource.clip = gunSounds[x];
+        _audioSource.pitch = 1;
+
     }
 }

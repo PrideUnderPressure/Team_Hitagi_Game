@@ -15,7 +15,7 @@ public class WeaponSwap : MonoBehaviour
     //PICKS UP ONLY IF: 1. First Slot is empty. 2. Second Slot is empty, and first slot DOES NOT equal to the picked up gun number.
     //DOESN'T PICK UP IF: 1. Second slot is empty, but first slot has the same number as the picked up gun. 
     public int usedWeapon = 0;
-    private new Vector3 whereToSpawn;
+    private Vector3 whereToSpawn;
     public GameObject objectShooting;
     public Shooting scriptShooting;
 
@@ -141,7 +141,7 @@ public class WeaponSwap : MonoBehaviour
                 maxDamage2 = maxDamage;
                 CarriedWeapon2(true);
             }
-        }
+    }
     }
 
     IEnumerator SwapCd()

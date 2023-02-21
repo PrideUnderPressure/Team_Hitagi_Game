@@ -45,6 +45,8 @@ public class Agent : MonoBehaviour
     public int number;
     
     public List<RuntimeAnimatorController> zombieVariants;
+
+    public ZombieAudioScript audioScript;
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -148,6 +150,16 @@ public class Agent : MonoBehaviour
             if (needsDetector)
             {
                 detector.GetComponent<PlayerDetector>().alarm = true;
+            }
+            
+            if (isRanged == false && isChaser != true)
+            {
+                int x = Random.Range(1, 10);
+                
+                if (x >= 7)
+                {
+                    audioScript.PlayGroan();
+                }
             }
         }
     }

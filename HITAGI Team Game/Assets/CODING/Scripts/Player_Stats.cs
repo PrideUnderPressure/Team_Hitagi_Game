@@ -11,7 +11,7 @@ public class Player_Stats : MonoBehaviour
     public Rigidbody2D rb;
     public bool canDamage;
     public bool damageCd;
-
+    public AudioSource audioSource;
     void Start()
     {
         damageCd = false;
@@ -25,6 +25,7 @@ public class Player_Stats : MonoBehaviour
         {
             if (canDamage && health - damage >= 0)
             {
+                audioSource.PlayOneShot(audioSource.clip, 1f);
                 gameObject.GetComponent<Player_Controller>().Blink();
                 Debug.Log("@HITTTTTTT");
                 health -= damage;

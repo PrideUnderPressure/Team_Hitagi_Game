@@ -14,8 +14,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/TutorialBullesScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/WeaponSwap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CODING/Scripts/ZombieBulletScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/EndScreen.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HordeSound.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SplashScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ZombieAudioScript.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -115,6 +117,7 @@
       <workItem from="1676781394307" duration="202000" />
       <workItem from="1676817569166" duration="2098000" />
       <workItem from="1676831148680" duration="4496000" />
+      <workItem from="1676949769323" duration="11682000" />
     </task>
     <servers />
   </component>

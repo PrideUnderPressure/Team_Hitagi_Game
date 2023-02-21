@@ -23,6 +23,8 @@ TagManager:
   - Bridge
   - TutorialObject
   - Exit
+  - DarkScreen
+  - End_Screen
   layers:
   - Default
   - TransparentFX
